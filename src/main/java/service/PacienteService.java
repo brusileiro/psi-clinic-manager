@@ -1,23 +1,21 @@
 package service;
 
+import lombok.RequiredArgsConstructor;
 import model.Paciente;
 import org.springframework.stereotype.Service;
 import repository.PacienteRepository;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class PacienteService {
 
 
-    private PacienteRepository pacienteRepository;
+    private final PacienteRepository pacienteRepository;
 
-    public PacienteService(PacienteRepository pacienteRepository) {
-        this.pacienteRepository = pacienteRepository;
-    }
 
     public Paciente criarPaciente(Paciente paciente) {
         if (paciente.getSaldoAtual() == null) {
@@ -40,12 +38,34 @@ public class PacienteService {
     }
 
     public Paciente atualizarPaciente (Paciente paciente) {
-        Optional<Paciente> pacienteAtualizado = buscarPorId(paciente.getId());
-        if (pacienteAtualizado.isEmpty()) {
+        Optional<Paciente> optional = buscarPorId(paciente.getId());
+        if (optional.isEmpty()) {
             throw new RuntimeException("Paciente nao encontrado com o ID: " + paciente.getId());
         }
-        pacienteRepository.save(paciente);
 
-        return paciente;
+        Paciente pacienteAtualizado = optional.get();
+
+        pacienteAtualizado.setNome(paciente.getNome());
+        pacienteAtualizado.setCpf(paciente.getCpf());
+        pacienteAtualizado.setAnotacoes(paciente.getAnotacoes());
+        pacienteAtualizado.setTelefone(paciente.getTelefone());
+        pacienteAtualizado.setDiaHorarioConsulta(paciente.getDiaHorarioConsulta());
+        pacienteAtualizado.setValorSessao(paciente.getValorSessao());
+
+
+        pacienteRepository.save(pacienteAtualizado);
+
+        return pacienteAtualizado;
+    }
+
+    public void deletarPaciente (Long id) {
+        Optional<Paciente> optional = pacienteRepository.findById(id);
+
+        if (optional.isEmpty()) {
+            throw new RuntimeException("Paciente nao encontrado");
+        }
+        Paciente pacienteEncontrado = optional.get();
+
+        pacienteRepository.delete(pacienteEncontrado);
     }
 }
