@@ -57,4 +57,10 @@ public class PagamentoService {
         pagamentoRepository.delete(pagamento);
 
     }
+
+    public List<Pagamento> listarPorPaciente(Long pacienteId) {
+        return pagamentoRepository.findByPacienteId(pacienteId);
+    }
+
+
 }

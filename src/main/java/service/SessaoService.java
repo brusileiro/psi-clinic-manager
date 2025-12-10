@@ -124,4 +124,8 @@ public class SessaoService {
 
         }
     }
+
+    public List<Sessao> listarPorPaciente(Long pacienteId) {
+        return sessaoRepository.findByPacienteId(pacienteId);
+    }
 }
