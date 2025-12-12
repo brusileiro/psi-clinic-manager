@@ -68,7 +68,6 @@ public class PacienteController {
             return ResponseEntity.notFound().build();
         }
         Paciente paciente = optional.get();
-        paciente.setId(id);
         updateDTO.aplicarAtualizacoes(paciente);
         Paciente atualizado = pacienteService.atualizarPaciente(paciente);
         PacienteDTO dto = PacienteDTO.from(atualizado);

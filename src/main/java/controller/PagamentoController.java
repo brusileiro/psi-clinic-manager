@@ -1,5 +1,7 @@
 package controller;
 
+import dto.PagamentoCreateDTO;
+import dto.PagamentoDTO;
 import lombok.RequiredArgsConstructor;
 import model.Pagamento;
 import org.springframework.http.HttpStatus;
@@ -7,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import service.PagamentoService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,24 +21,32 @@ public class PagamentoController {
     private final PagamentoService pagamentoService;
 
     @GetMapping
-    public ResponseEntity<List<Pagamento>> listarTodos() {
+    public ResponseEntity<List<PagamentoDTO>> listarTodos() {
         List<Pagamento> pagamentos = pagamentoService.listarTodos();
-        return ResponseEntity.ok(pagamentos);
+        List<PagamentoDTO> pagamentoDTOS = new ArrayList<>();
+        for (Pagamento p : pagamentos) {
+            PagamentoDTO dto = PagamentoDTO.from(p);
+            pagamentoDTOS.add(dto);
+        }
+        return ResponseEntity.ok(pagamentoDTOS);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Pagamento> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<PagamentoDTO> buscarPorId(@PathVariable Long id) {
         Optional<Pagamento> optional = pagamentoService.buscarPorId(id);
         if (optional.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         Pagamento pagamentoEncontrado = optional.get();
-        return ResponseEntity.ok(pagamentoEncontrado);
+        PagamentoDTO pagamentoDTO = PagamentoDTO.from(pagamentoEncontrado);
+        return ResponseEntity.ok(pagamentoDTO);
     }
 
     @PostMapping
-    public ResponseEntity<Pagamento> criarPagamento (@RequestBody Pagamento pagamento) {
+    public ResponseEntity<PagamentoDTO> criarPagamento (@RequestBody PagamentoCreateDTO pagamentoDTO) {
+        Pagamento pagamento = pagamentoDTO.toEntity();
         Pagamento pagamentoCriado = pagamentoService.registrarPagamento(pagamento);
-        return ResponseEntity.status(HttpStatus.CREATED).body(pagamentoCriado);
+        PagamentoDTO dto = PagamentoDTO.from(pagamentoCriado);
+        return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @DeleteMapping("/{id}")

@@ -34,6 +34,7 @@ public class SessaoService {
 
         ajustarSaldo(paciente, sessao);
 
+        sessao.setPaciente(paciente);
         pacienteRepository.save(paciente);
         sessaoRepository.save(sessao);
 

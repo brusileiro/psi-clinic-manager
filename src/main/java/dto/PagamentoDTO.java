@@ -1,0 +1,35 @@
+package dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import model.FormaPagamento;
+import model.Paciente;
+import model.Pagamento;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class PagamentoDTO {
+
+    private Long id;
+    private LocalDate data;
+    private BigDecimal valor;
+    private FormaPagamento formaPagamento;
+    private String paciente;
+
+    public static PagamentoDTO from(Pagamento pagamento) {
+        PagamentoDTO dto = new PagamentoDTO();
+        dto.setId(pagamento.getId());
+        dto.setData(pagamento.getData());
+        dto.setValor(pagamento.getValor());
+        dto.setFormaPagamento(pagamento.getFormaPagamento());
+        dto.setPaciente(pagamento.getPaciente().getNome());
+        return dto;
+    }
+}

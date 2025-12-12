@@ -23,10 +23,20 @@ public class PacienteUpdateDTO {
     private String anotacoes;
 
     public void aplicarAtualizacoes(Paciente paciente) {
+        if (this.getNome() != null) {
         paciente.setNome(this.getNome());
-        paciente.setTelefone(this.getTelefone());
-        paciente.setDiaHorarioConsulta(this.getDiaHorarioConsulta());
-        paciente.setValorSessao(this.getValorSessao());
-        paciente.setAnotacoes(this.getAnotacoes());
+        }
+        if (this.getTelefone() != null) {
+            paciente.setTelefone(this.getTelefone());
+        }
+        if (this.getDiaHorarioConsulta() != null) {
+            paciente.setDiaHorarioConsulta(this.getDiaHorarioConsulta());
+        }
+        if (this.getValorSessao() != null) {
+            paciente.setValorSessao(this.getValorSessao());
+        }
+        if (this.getAnotacoes() != null) {
+            paciente.setAnotacoes(this.getAnotacoes());
+        }
     }
 }
