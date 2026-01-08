@@ -1,13 +1,13 @@
-package controller;
+package com.example.PsiSoftware.controller;
 
-import dto.PagamentoCreateDTO;
-import dto.PagamentoDTO;
+import com.example.PsiSoftware.dto.PagamentoCreateDTO;
+import com.example.PsiSoftware.dto.PagamentoDTO;
 import lombok.RequiredArgsConstructor;
-import model.Pagamento;
+import com.example.PsiSoftware.model.Pagamento;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.PagamentoService;
+import com.example.PsiSoftware.service.PagamentoService;
 
 import java.util.ArrayList;
 import java.util.List;

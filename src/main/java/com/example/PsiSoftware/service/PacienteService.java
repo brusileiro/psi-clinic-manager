@@ -1,9 +1,9 @@
-package service;
+package com.example.PsiSoftware.service;
 
 import lombok.RequiredArgsConstructor;
-import model.Paciente;
+import com.example.PsiSoftware.model.Paciente;
 import org.springframework.stereotype.Service;
-import repository.PacienteRepository;
+import com.example.PsiSoftware.repository.PacienteRepository;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,4 +1,4 @@
-package model;
+package com.example.PsiSoftware.model;
 
 public enum FormaPagamento {
     PIX,

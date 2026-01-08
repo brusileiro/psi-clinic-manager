@@ -1,19 +1,19 @@
-package controller;
+package com.example.PsiSoftware.controller;
 
-import dto.PacienteCreateDTO;
-import dto.PacienteDTO;
-import dto.PacienteUpdateDTO;
+import com.example.PsiSoftware.dto.PacienteCreateDTO;
+import com.example.PsiSoftware.dto.PacienteResponseDTO;
+import com.example.PsiSoftware.dto.PacienteUpdateDTO;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import model.Paciente;
-import model.Pagamento;
-import model.Sessao;
-import org.aspectj.apache.bcel.classfile.Module;
+import com.example.PsiSoftware.model.Paciente;
+import com.example.PsiSoftware.model.Pagamento;
+import com.example.PsiSoftware.model.Sessao;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.PacienteService;
-import service.PagamentoService;
-import service.SessaoService;
+import com.example.PsiSoftware.service.PacienteService;
+import com.example.PsiSoftware.service.PagamentoService;
+import com.example.PsiSoftware.service.SessaoService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -30,39 +30,39 @@ public class PacienteController {
     private final PagamentoService pagamentoService;
 
     @GetMapping
-    public ResponseEntity<List<PacienteDTO>> listarTodos() {
+    public ResponseEntity<List<PacienteResponseDTO>> listarTodos() {
         List<Paciente> pacientes = pacienteService.listarTodos();
-        List<PacienteDTO> pacienteDTOList = new ArrayList<>();
+        List<PacienteResponseDTO> pacienteResponseDTOList = new ArrayList<>();
         for (Paciente p : pacientes) {
-            PacienteDTO dto = PacienteDTO.from(p);
-            pacienteDTOList.add(dto);
+            PacienteResponseDTO dto = PacienteResponseDTO.from(p);
+            pacienteResponseDTOList.add(dto);
         }
-        return ResponseEntity.ok(pacienteDTOList);
+        return ResponseEntity.ok(pacienteResponseDTOList);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PacienteDTO> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<PacienteResponseDTO> buscarPorId(@PathVariable Long id) {
         Optional<Paciente> optional = pacienteService.buscarPorId(id);
 
         if (optional.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         Paciente paciente = optional.get();
-        PacienteDTO pacienteDTO = PacienteDTO.from(paciente);
+        PacienteResponseDTO pacienteResponseDTO = PacienteResponseDTO.from(paciente);
 
-        return ResponseEntity.ok(pacienteDTO);
+        return ResponseEntity.ok(pacienteResponseDTO);
     }
 
     @PostMapping
-    public ResponseEntity<PacienteDTO> criarPaciente(@RequestBody PacienteCreateDTO pacienteDTO) {
+    public ResponseEntity<PacienteResponseDTO> criarPaciente(@Valid @RequestBody PacienteCreateDTO pacienteDTO) {
         Paciente paciente = pacienteDTO.toEntity();
         Paciente pacienteCriado = pacienteService.criarPaciente(paciente);
-        PacienteDTO dto = PacienteDTO.from(pacienteCriado);
+        PacienteResponseDTO dto = PacienteResponseDTO.from(pacienteCriado);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PacienteDTO> atualizar(@PathVariable Long id, @RequestBody PacienteUpdateDTO updateDTO) {
+    public ResponseEntity<PacienteResponseDTO> atualizar(@PathVariable Long id, @RequestBody PacienteUpdateDTO updateDTO) {
         Optional<Paciente> optional = pacienteService.buscarPorId(id);
         if (optional.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -70,7 +70,7 @@ public class PacienteController {
         Paciente paciente = optional.get();
         updateDTO.aplicarAtualizacoes(paciente);
         Paciente atualizado = pacienteService.atualizarPaciente(paciente);
-        PacienteDTO dto = PacienteDTO.from(atualizado);
+        PacienteResponseDTO dto = PacienteResponseDTO.from(atualizado);
 
         return ResponseEntity.ok(dto);
     }

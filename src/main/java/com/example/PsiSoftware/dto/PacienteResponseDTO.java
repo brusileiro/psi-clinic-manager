@@ -1,10 +1,10 @@
-package dto;
+package com.example.PsiSoftware.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import model.Paciente;
+import com.example.PsiSoftware.model.Paciente;
 
 import java.math.BigDecimal;
 
@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PacienteDTO {
+public class PacienteResponseDTO {
 
     private Long id;
     private String nome;
@@ -21,8 +21,8 @@ public class PacienteDTO {
     private BigDecimal valorSessao;
     private BigDecimal saldoAtual;
 
-    public static PacienteDTO from(Paciente paciente) {
-        PacienteDTO dto = new PacienteDTO();
+    public static PacienteResponseDTO from(Paciente paciente) {
+        PacienteResponseDTO dto = new PacienteResponseDTO();
         dto.setId(paciente.getId());
         dto.setNome(paciente.getNome());
         dto.setTelefone(paciente.getTelefone());

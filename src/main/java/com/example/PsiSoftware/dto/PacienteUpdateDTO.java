@@ -1,12 +1,10 @@
-package dto;
+package com.example.PsiSoftware.dto;
 
-import controller.PacienteController;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import model.Paciente;
-import service.PacienteService;
+import com.example.PsiSoftware.model.Paciente;
 
 import java.math.BigDecimal;
 

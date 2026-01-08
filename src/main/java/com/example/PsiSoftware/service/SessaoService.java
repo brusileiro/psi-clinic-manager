@@ -1,10 +1,10 @@
-package service;
+package com.example.PsiSoftware.service;
 
-import model.Paciente;
-import model.Sessao;
+import com.example.PsiSoftware.model.Paciente;
+import com.example.PsiSoftware.model.Sessao;
 import org.springframework.stereotype.Service;
-import repository.PacienteRepository;
-import repository.SessaoRepository;
+import com.example.PsiSoftware.repository.PacienteRepository;
+import com.example.PsiSoftware.repository.SessaoRepository;
 
 import java.util.List;
 import java.util.Optional;

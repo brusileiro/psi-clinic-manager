@@ -1,6 +1,6 @@
-package repository;
+package com.example.PsiSoftware.repository;
 
-import model.Pagamento;
+import com.example.PsiSoftware.model.Pagamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

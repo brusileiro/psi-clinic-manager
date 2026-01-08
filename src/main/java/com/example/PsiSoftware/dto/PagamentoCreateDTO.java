@@ -1,12 +1,12 @@
-package dto;
+package com.example.PsiSoftware.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import model.FormaPagamento;
-import model.Paciente;
-import model.Pagamento;
+import com.example.PsiSoftware.model.FormaPagamento;
+import com.example.PsiSoftware.model.Paciente;
+import com.example.PsiSoftware.model.Pagamento;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

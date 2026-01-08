@@ -1,4 +1,4 @@
-package model;
+package com.example.PsiSoftware.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,6 +21,7 @@ public class Paciente {
 
     private String nome;
     private String cpf;
+
     private String telefone;
     private String diaHorarioConsulta;
     private BigDecimal valorSessao;

@@ -1,15 +1,17 @@
-package service;
+package com.example.PsiSoftware.service;
 
-import model.Paciente;
-import model.Pagamento;
-import repository.PacienteRepository;
-import repository.PagamentoRepository;
-import repository.SessaoRepository;
+import com.example.PsiSoftware.model.Paciente;
+import com.example.PsiSoftware.model.Pagamento;
+import com.example.PsiSoftware.repository.PacienteRepository;
+import com.example.PsiSoftware.repository.PagamentoRepository;
+import com.example.PsiSoftware.repository.SessaoRepository;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PagamentoService {
 
     private PacienteRepository pacienteRepository;

@@ -1,14 +1,14 @@
-package controller;
+package com.example.PsiSoftware.controller;
 
-import dto.SessaoCreateDTO;
-import dto.SessaoDTO;
-import dto.SessaoUpdateDTO;
+import com.example.PsiSoftware.dto.SessaoCreateDTO;
+import com.example.PsiSoftware.dto.SessaoDTO;
+import com.example.PsiSoftware.dto.SessaoUpdateDTO;
 import lombok.RequiredArgsConstructor;
-import model.Sessao;
+import com.example.PsiSoftware.model.Sessao;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.SessaoService;
+import com.example.PsiSoftware.service.SessaoService;
 
 import java.util.ArrayList;
 import java.util.List;
