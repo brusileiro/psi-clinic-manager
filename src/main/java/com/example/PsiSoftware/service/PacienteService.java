@@ -21,9 +21,14 @@ public class PacienteService {
         if (paciente.getSaldoAtual() == null) {
             paciente.setSaldoAtual(BigDecimal.ZERO);
         }
+        if (paciente.getCpf().length() < 11 ) {
+            throw new RuntimeException("CPF inválido, verifique o numero de caracteres: " + paciente.getCpf());
+        }
+        if (paciente.getCpf().length() > 11 ) {
+            throw new RuntimeException("CPF inválido, verifique o numero de caracteres: " + paciente.getCpf());
+        }
 
-        pacienteRepository.save(paciente);
-        return paciente;
+        return pacienteRepository.save(paciente);
 
     }
 
@@ -52,10 +57,7 @@ public class PacienteService {
         pacienteAtualizado.setDiaHorarioConsulta(paciente.getDiaHorarioConsulta());
         pacienteAtualizado.setValorSessao(paciente.getValorSessao());
 
-
-        pacienteRepository.save(pacienteAtualizado);
-
-        return pacienteAtualizado;
+        return pacienteRepository.save(pacienteAtualizado);
     }
 
     public void deletarPaciente (Long id) {
