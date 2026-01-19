@@ -33,10 +33,12 @@ public class PacienteController {
     public ResponseEntity<List<PacienteResponseDTO>> listarTodos() {
         List<Paciente> pacientes = pacienteService.listarTodos();
         List<PacienteResponseDTO> pacienteResponseDTOList = new ArrayList<>();
+
         for (Paciente p : pacientes) {
             PacienteResponseDTO dto = PacienteResponseDTO.from(p);
             pacienteResponseDTOList.add(dto);
         }
+
         return ResponseEntity.ok(pacienteResponseDTOList);
     }
 

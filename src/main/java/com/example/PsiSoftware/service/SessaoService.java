@@ -1,7 +1,10 @@
 package com.example.PsiSoftware.service;
 
+import com.example.PsiSoftware.event.SessaoCriadaEvent;
 import com.example.PsiSoftware.model.Paciente;
 import com.example.PsiSoftware.model.Sessao;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import com.example.PsiSoftware.repository.PacienteRepository;
 import com.example.PsiSoftware.repository.SessaoRepository;
@@ -9,16 +12,14 @@ import com.example.PsiSoftware.repository.SessaoRepository;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class SessaoService {
 
-    private PacienteRepository pacienteRepository;
-    private SessaoRepository sessaoRepository;
 
-    public SessaoService(SessaoRepository sessaoRepository, PacienteRepository pacienteRepository) {
-        this.sessaoRepository = sessaoRepository;
-        this.pacienteRepository = pacienteRepository;
-    }
+    private final ApplicationEventPublisher publisher;
+    private final PacienteRepository pacienteRepository;
+    private final SessaoRepository sessaoRepository;
 
     public Sessao registrarSessao (Sessao sessao) {
         if (sessao.getPaciente() == null) {
@@ -36,9 +37,10 @@ public class SessaoService {
 
         sessao.setPaciente(paciente);
         pacienteRepository.save(paciente);
-        sessaoRepository.save(sessao);
+        Sessao salva = sessaoRepository.save(sessao);
+        publisher.publishEvent(new SessaoCriadaEvent(paciente.getNome(), salva.getDataSessao()));
 
-        return sessao;
+        return salva;
 
     }
 

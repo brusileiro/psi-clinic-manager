@@ -39,4 +39,5 @@ public class PacienteCreateDTO {
         paciente.setAnotacoes(this.getAnotacoes());
         return paciente;
     }
+
 }
