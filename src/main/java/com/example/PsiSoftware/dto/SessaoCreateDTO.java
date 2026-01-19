@@ -9,7 +9,7 @@ import com.example.PsiSoftware.model.Sessao;
 import com.example.PsiSoftware.model.StatusSessao;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class SessaoCreateDTO {
 
-    private LocalDate dataSessao;
+    private LocalDateTime dataSessao;
     private Long idPaciente;
     private BigDecimal valor;
     private StatusSessao status;

@@ -1,6 +1,6 @@
 package com.example.PsiSoftware.event;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public record SessaoCriadaEvent(String pacienteNome, LocalDate dataSessao) {
+public record SessaoCriadaEvent(String pacienteNome, LocalDateTime dataSessao) {
 }
