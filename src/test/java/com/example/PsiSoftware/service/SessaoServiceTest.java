@@ -2,17 +2,16 @@ package com.example.PsiSoftware.service;
 
 import com.example.PsiSoftware.model.Paciente;
 import com.example.PsiSoftware.model.Sessao;
-// ✅ Ajuste este import se teu enum tiver outro nome
 import com.example.PsiSoftware.model.StatusSessao;
 
 import com.example.PsiSoftware.repository.PacienteRepository;
 import com.example.PsiSoftware.repository.SessaoRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.context.ApplicationEventPublisher;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,10 +26,17 @@ import static org.mockito.Mockito.*;
 public class SessaoServiceTest {
 
     @Mock
-    PacienteRepository pacienteRepository;
+    private PacienteRepository pacienteRepository;
+
     @Mock
-    SessaoRepository sessaoRepository;
-    @InjectMocks SessaoService sessaoService;
+    private SessaoRepository sessaoRepository;
+
+    @Mock
+    private ApplicationEventPublisher publisher;
+
+    @InjectMocks
+    private SessaoService sessaoService;
+
 
     @Test
     void registrarSessao_deveLancarExcecaoQuandoPacienteForNull() {
@@ -203,10 +209,8 @@ public class SessaoServiceTest {
 
         Sessao resultado = sessaoService.atualizarSessao(entrada);
 
-        // Reverte antigo (-100): 200 -> 100; Aplica novo (+50): 100 -> 150
         assertEquals(new BigDecimal("150.00"), paciente.getSaldoAtual());
 
-        // Conferir que o objeto retornado é o "encontrado"
         assertSame(existente, resultado);
 
         verify(pacienteRepository, times(1)).save(paciente);
@@ -241,7 +245,6 @@ public class SessaoServiceTest {
         boolean resultado = sessaoService.deletarSessao(50L);
 
         assertTrue(resultado);
-        // Reverte antigo (-100): 200 -> 100
         assertEquals(new BigDecimal("100.00"), paciente.getSaldoAtual());
 
         verify(pacienteRepository, times(1)).save(paciente);
